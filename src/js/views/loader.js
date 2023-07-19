@@ -1,6 +1,6 @@
 class Loader {  
     static showLoader() {
-        const container = document.querySelector('.tickets-sections .container .row');
+        const container = document.querySelector('.form-section');
         const loader = `
             <div class="progress">
                 <div class="indeterminate"></div>

@@ -10,6 +10,7 @@ class Locations {
         this.aircrafts = null;
         this.carriers = null;
         this.currencies = null;
+        this.activeFlights = null;
         this.formatDate = helpers.formatDate;
     }
 
@@ -20,6 +21,10 @@ class Locations {
             countries: this.countries, 
             cities: this.cities, 
         };
+    }
+
+    getActiveFlights() {
+        return this.activeFlights;
     }
 
     getCityCountryList() {
@@ -62,7 +67,9 @@ class Locations {
         this.aircrafts = response.dictionaries.aircraft;
         this.carriers = response.dictionaries.carriers;
         this.currencies = response.dictionaries.currencies;
-        return this.serializeFlights(response.data);
+        this.activeFlights = this.serializeFlights(response.data);
+        Loader.hideLoader();
+        return this.activeFlights; 
     }
 
     serializeCountries(countries) {
