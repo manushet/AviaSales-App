@@ -2,7 +2,7 @@ import api from "../services/api-service";
 import { formatDate } from "../helpers/date";
 import Loader from "../views/loader";
 
-class Locations {
+export class Locations {
     constructor(api, helpers) {
         this.api = api;
         this.countries = null;
@@ -73,6 +73,9 @@ class Locations {
     }
 
     serializeCountries(countries) {
+        if (!Array.isArray(countries) || !countries.length) {
+            return {};
+        }
         return countries.reduce((acc, country) => {
             acc[country.code] = country;
             return acc;
@@ -80,6 +83,9 @@ class Locations {
     }
 
     serializeCities(cities) {
+        if (!Array.isArray(cities) || !cities.length) {
+            return {};
+        }        
         return cities.reduce((acc, city) => {
             const country_name = this.getCountryNameByCode(city.country_code);
             const city_name = city.name || city.name_translations["en"];
@@ -95,6 +101,9 @@ class Locations {
     }  
        
     serializeFlights(flights) {
+        if (!Array.isArray(flights) || !flights.length) {
+            return [];
+        }         
         const new_flights = flights.map(flight => {
             const departure = flight.itineraries[0].segments[0].departure.iataCode;
             const departure_city_name = this.getCityNameByCode(departure);

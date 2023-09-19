@@ -3,7 +3,7 @@ import qs from "qs";
 import config from '../config/api';
 import countries from '../data/countries.json';
 import cities from '../data/cities.json';
-class Api {
+export class Api {
     constructor(config) {
         axios.defaults.headers.get['Content-Type'] = 'application/json';
         axios.defaults.headers.get['X-Access-Token'] = this.token;        
@@ -17,7 +17,8 @@ class Api {
 
     getCountries() {
         try {
-            return countries;
+            //console.log(countries);
+            return countries;     
         }
         catch(err) {
             console.log(err);
@@ -26,6 +27,7 @@ class Api {
 
     getCities() {
         try {
+            //console.log(cities);
             return cities;
         }
         catch(err) {
@@ -102,6 +104,7 @@ class Api {
         };
         try {
             const response = await axios.request(config);
+            console.log(response.data);
             return response.data;
         }
         catch(err) {
